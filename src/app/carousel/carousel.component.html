@@ -1,6 +1,15 @@
+<div class="row">
+    <div  *ngFor="let product of products$  | async; let i = index" class="col s12 m3" >
+      <p> {{product.image}}</p>
+      <p>Index: {{i}}</p>
+      <p>deft</p>
+    </div>
+  </div>
+
+
 <div class="carousel">
     <a class="carousel-item" href="#one!">
-      <img src="../../assets/books/p00.jpg">
+      <img src=products.image>
     </a>
     <a class="carousel-item" href="#two!">
       <img src="../../assets/books/p01.jpg">
