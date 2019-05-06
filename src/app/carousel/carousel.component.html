@@ -1,13 +1,20 @@
 <div class="row">
     <div  *ngFor="let product of products$  | async; let i = index" class="col s12 m3" >
-      <p> {{product.image}}</p>
+      <p> {{product.payload.doc.data().image}}</p>
       <p>Index: {{i}}</p>
       <p>deft</p>
     </div>
   </div>
 
 
-<div class="carousel">
+<div class="carousel" >
+
+  <div  *ngFor="let product of products$  | async; let i = index" class="col s12 m3" >
+      <p> {{product.payload.doc.data().image}}</p>
+    <a class="carousel-item" href="#one!">
+        <img src="{{product.payload.doc.data().image}}">
+    </a>
+  </div>
     <a class="carousel-item" href="#one!">
       <img src=products.image>
     </a>
