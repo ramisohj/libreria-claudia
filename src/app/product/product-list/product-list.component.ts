@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Product } from 'src/app/models/ProductModel';
 
 @Component({
     selector: 'product-list',
@@ -6,10 +7,10 @@ import { Component } from '@angular/core';
 })
 export class ProductListComponent {
 
-    productos: any[] = [{ nombre: "Borradores", precio: "2bs", imagen: "../../../assets/images/borradores.jpg", stock: "100", descripcion: "MILAN" },
-    { nombre: "Compas", precio: "8bs", imagen: "../../../assets/images/compas.png", stock: "50", descripcion: "" },
-    { nombre: "Estuche", precio: "30bs", imagen: "../../../assets/images/estuche.jpg", stock: "15", descripcion: "" },
-    { nombre: "Lapiceros", precio: "1bs", imagen: "../../../assets/images/lapiceros.jpg", stock: "150", descripcion: "" },
-    { nombre: "Marcadores", precio: "5bs", imagen: "../../../assets/images/marcadores.jpg", stock: "150", descripcion: "" },
-    { nombre: "Hojas a Colores", precio: "30bs", imagen: "../../../assets/images/paquete_hojas_colores.jpg", stock: "150", descripcion: "Paquete de Hojas a colores" }];
+    products: Product[] = [{ name: "Borradores", price: 2, image: "../../../assets/images/borradores.jpg", stock: 100, description: "MILAN" },
+    { name: "Compas", price: 8, image: "../../../assets/images/compas.png", stock: 50, description: "" },
+    { name: "Estuche", price: 30, image: "../../../assets/images/estuche.jpg", stock: 15, description: "" },
+    { name: "Lapiceros", price: 1, image: "../../../assets/images/lapiceros.jpg", stock: 150, description: "" },
+    { name: "Marcadores", price: 5, image: "../../../assets/images/marcadores.jpg", stock: 150, description: "" },
+    { name: "Hojas a Colores", price: 30, image: "../../../assets/images/paquete_hojas_colores.jpg", stock: 150, description: "Paquete de Hojas a colores" }];
 }
