@@ -1,1 +1,39 @@
   <product-card [products]='products'></product-card>
+<table Class ="table table-striped">
+  <tr>
+        <th>
+          ID
+        </th>
+        <th>
+          Nombre
+        </th>
+        <th>
+          Descripcion
+        </th>
+        <th>
+          Unidades
+        </th>
+        <th>
+          Precio
+        </th>
+
+  </tr>
+  <tr *ngFor="let item of products; let i = index">w
+    <td>
+      {{i}} - {{item.id}}
+    </td>
+    <td>
+      {{itemm.nombre}}
+    </td>
+    <td>
+      {{item.descripcion}}
+    </td>
+    <td>
+      {{item.unidades}}
+    </td>
+    <td>
+      {{item.precio}} Bs.
+    </td>
+  </tr>
+
+</table>
