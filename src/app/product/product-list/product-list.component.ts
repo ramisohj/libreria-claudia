@@ -1,11 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Product } from 'src/app/models/ProductModel';
 
 @Component({
+    moduleId: module.id,
     selector: 'product-list',
     templateUrl: 'product-list.component.html'
 })
-export class ProductListComponent {
+export class ProductListComponqqent {
+    @Input() product: Array<Product>
+    
+    displayProduct(product: Product){
+        console.log(product);
+    }
 
     products: Product[] = [{ name: "Borradores", price: 2, image: "../../../assets/images/borradores.jpg", stock: 100, description: "MILAN" },
     { name: "C ompas", price: 8, image: "../../../assets/images/compas.png", stock: 50, description: "" },
