@@ -1,0 +1,20 @@
+
+<div class="row">
+    <!-- <li *ngFor="let number of [0,1,2,3,4]">{{number}}</li> -->
+  <div class="col s12 m3" *ngFor="let product of products$  |  async">
+      <div class="card">
+          <div class="card-image">
+              <img src="{{product.payload.doc.data().image}}">
+              <span class="card-title">{{product.name}}</span>
+          </div>
+          <div class="card-content">
+              <p>{{product.payload.doc.data().description}}</p>
+              Precio: <p>{{product.payload.doc.data().price}}</p>
+              Cantidad: <p>{{product.payload.doc.data().stock}}</p>
+          </div>
+          <div class="card-action">
+              <a>Mas Detalles</a>
+          </div>
+      </div>
+  </div>
+</div>
