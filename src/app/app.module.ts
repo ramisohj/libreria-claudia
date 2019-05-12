@@ -14,6 +14,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms'; 
+import { ProductListComponent } from './product/product-list/product-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import { FormsModule } from '@angular/forms';
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    FormsModule
+    FormsModule,
+    ProductListComponent
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]
