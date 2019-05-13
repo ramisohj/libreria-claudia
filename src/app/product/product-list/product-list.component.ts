@@ -1,16 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/ProductModel';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
     selector: 'product-list',
     templateUrl: 'product-list.component.html'
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit {
 
-    products: Product[] = [{ name: "Borradores", price: 2, image: "../../../assets/images/borradores.jpg", stock: 100, description: "MILAN" },
-    { name: "Compas", price: 8, image: "../../../assets/images/compas.png", stock: 50, description: "" },
-    { name: "Estuche", price: 30, image: "../../../assets/images/estuche.jpg", stock: 15, description: "" },
-    { name: "Lapiceros", price: 1, image: "../../../assets/images/lapiceros.jpg", stock: 150, description: "" },
-    { name: "Marcadores", price: 5, image: "../../../assets/images/marcadores.jpg", stock: 150, description: "" },
-    { name: "Hojas a Colores", price: 30, image: "../../../assets/images/paquete_hojas_colores.jpg", stock: 150, description: "Paquete de Hojas a colores" }];
+    products: Product[];
+
+    constructor(private productService: ProductService) { }
+
+    ngOnInit() {
+        this.productService.getProducts().subscribe(
+            data => {
+                this.products = data.map(e => {
+                    return {
+                        id: e.payload.doc.id,
+                        name: e.payload.doc.data()['name'],
+                        description: e.payload.doc.data()['description'],
+                        price: e.payload.doc.data()['price'],
+                        stock: e.payload.doc.data()['stock'],
+                        image: e.payload.doc.data()['image']
+                    };
+                })
+            }
+        );
+    }
 }
