@@ -1,18 +1,25 @@
-
-
+<style>
+    .crop {
+         object-fit: cover;
+         width: 100px;
+         height: 250px;
+     }
+</style>
+<div class="center-align">
+    <h3>Productos Estrella</h3>
+</div>
 <div class="container">
     <div class="row">
         <!-- <li *ngFor="let number of [0,1,2,3,4]">{{number}}</li> -->
     <div class="col s12 m4 l4" *ngFor="let product of products$ ">
         <div class="card medium">
             <div class="card-image">
-                <img src="{{product.image}}">
+                <img src="{{product.image}}" class="crop">
                 <span class="card-title black">{{product.name}}</span>
             </div>
             <div class="card-content">
                 <p>Precio: {{product.price}}</p>
                 <p>Cantidad: {{product.stock}}</p>
-                <p>Descripcion: {{product.description}}</p>
             </div>
             <div class="card-action">
                 <a class="black-text" >Mas Detalles</a>

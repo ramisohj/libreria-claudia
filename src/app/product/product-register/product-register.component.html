@@ -19,11 +19,11 @@
               <div class="row">
                 <div class="input-field col s6">
                   <input id="price" name="price" type="number" class="validate" [(ngModel)] ="productToCreate.price" required min="0">
-                  <label for="price">Precio</label>
+                  <label for="price">Precio (Bs.)</label>
                 </div>
                 <div class="input-field col s6">
                   <input id="stock" name="stock" type="number" class="validate" [(ngModel)] ="productToCreate.stock" required min="0">
-                  <label for="stock">Cantidad</label>
+                  <label for="stock">Cantidad (Unid.)</label>
                 </div>
               </div>
               <div class="row">
@@ -34,7 +34,7 @@
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="image" type="file" class="validate" (change)="onSelectFile($event)">
+                  <input id="image" type="file" accept=".jpg,.jpeg,.png,.gif" class="validate" (change)="onSelectFile($event)">
                 </div>
               </div>
               <div class="row center">
