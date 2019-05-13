@@ -19,9 +19,18 @@ export class ProductService {
 
   get3Products() {
     var ls =  this.firestore.collection('product').snapshotChanges();
-    let lss: any[] = [ls[0], ls[1],ls[2]];
-    console.log('PRODUCT 3LITS --> ', lss);
-    return this.firestore.collection('product').snapshotChanges();
+    let lss: any[] = new Array(3);
+    let index = 0;
+    this.firestore.collection('product').snapshotChanges().forEach(actions => {
+      return actions.map(action => {
+        const data = action.payload.doc.data();
+        if(index<3){
+          lss[index] = data;
+          index++;
+        }
+      });
+    });
+    return lss;
   }
 
   updateProduct(id,product){
