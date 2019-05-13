@@ -22,9 +22,8 @@ export class CollectionComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('COLELCTCION ----------------->>> ', this.products$ )
     this.products$ = this.productsService.get3Products();
     this.products$.map(product => console.log('COLLECTION PRODUCT --> ',product));
   }
-
+  
 }
