@@ -1,0 +1,10 @@
+.card{
+    width: 50%;
+    margin-left: 25%;
+}
+.preview_img {
+	display: none;
+}
+#prev{
+    margin-left: 25%;
+}
