@@ -19,21 +19,7 @@ export class ProductRegisterComponent implements OnInit {
 
   constructor(private productService: ProductService) { }
   ngOnInit() {
-    this.productService.getProducts().subscribe(
-      data => {
-        this.product = data.map(e=>{
-          return{
-            id:e.payload.doc.id,
-            name:e.payload.doc.data()['name'],
-            description:e.payload.doc.data()['description'],
-            price:e.payload.doc.data()['price'],
-            stock:e.payload.doc.data()['stock'],
-            image:e.payload.doc.data()['image']
-          };
-        })
-        console.log(this.product);
-      }
-    );
+    
   }
   createProduct() {
     let product = {};
