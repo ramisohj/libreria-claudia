@@ -1,47 +1,59 @@
-
+<br>
 <div class="row">
-  <div class="col s12">
     <div class="card">
+      <br>
+      <div class="center-align">
+            <h5>Registro de Producto</h5>
+      </div>
       <div class="card-image">
       </div>
         <div class="card-content">
           <div class="row">
-            <form class="col s12">
+            <form class="col s12" (ngSubmit)="createProduct(formNew)"  #formNew="ngForm">
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="name" name="name" type="text" class="validate" [(ngModel)] ="productToCreate.name">
+                  <input id="name" name="name" type="text" class="validate" [(ngModel)] ="productToCreate.name" required maxlength="100">
                   <label for="name">Nombre del Producto</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s6">
-                  <input id="price" name="price" type="number" class="validate" [(ngModel)] ="productToCreate.price">
+                  <input id="price" name="price" type="number" class="validate" [(ngModel)] ="productToCreate.price" required min="0">
                   <label for="price">Precio</label>
                 </div>
                 <div class="input-field col s6">
-                  <input id="stock" name="stock" type="number" class="validate" [(ngModel)] ="productToCreate.stock">
+                  <input id="stock" name="stock" type="number" class="validate" [(ngModel)] ="productToCreate.stock" required min="0">
                   <label for="stock">Cantidad</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <textarea id="description" name="description" type="text" class=" validate materialize-textarea" [(ngModel)] ="productToCreate.description"></textarea>
+                  <textarea id="description" name="description" type="text" class="validate materialize-textarea" [(ngModel)] ="productToCreate.description"></textarea>
                   <label for="description">Descripción</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="image" type="file" class="validate">
+                  <input id="image" type="file" class="validate" (change)="onSelectFile($event)">
+                </div>
+              </div>
+              <div class="row center">
+                <div class="col s12">
+                    <img [src]="url" width="50%" class="preview_img" id="preview"> 
+                    <br/>
                 </div>
               </div>
               <div class="row">
-                  <div class="col s2 offset-s5">
-                      <button class="btn waves-effect waves-light" (click)="createProduct()">Crear</button>
+                  <div class="col s4 offset-s4">
+                    <div class="row center">
+                      <div class="col s12">
+                          <button class="btn waves-effect waves-light" type="submit">Registrar</button>
+                      </div>
+                    </div>
                   </div>
               </div>
             </form>
           </div>
         </div>
     </div>
-  </div>
 </div>
