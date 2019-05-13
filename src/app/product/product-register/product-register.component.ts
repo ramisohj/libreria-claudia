@@ -49,7 +49,7 @@ export class ProductRegisterComponent implements OnInit {
       var reader = new FileReader();
 
       reader.readAsDataURL(event.target.files[0]);
-      reader.onload = (event: Event) => {
+      reader.onload = (event: any) => {
         this.url = event.target.result;
       }
       }
