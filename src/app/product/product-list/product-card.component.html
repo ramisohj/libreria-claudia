@@ -6,7 +6,9 @@
     }
 </style>
 <div class="row">
-    <div class="col s12 m3" *ngFor="let product of products">
+    <h3>SEARCH</h3>
+    <input value="borrador"  type="text" [(ngModel)]="term">
+    <div class="col s12 m3" *ngFor="let product of products | filter:'Borrador Alzhaimer'">
         <div class="card">
             <div class="card-image ">
                 <img src="{{product.image}}" class="crop">

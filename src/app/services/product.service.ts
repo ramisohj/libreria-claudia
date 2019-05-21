@@ -33,6 +33,19 @@ export class ProductService {
     return lss;
   }
 
+  search( word ) {
+    let index = 0;
+    this.firestore.collection('product').snapshotChanges().forEach(actions => {
+      return actions.map(action => {
+        const data = action.payload.doc.data();
+        const name = data['name'];
+        if(name == word){
+          console.log('BORRADOR --> ', name);
+        }
+      });
+    });
+  }
+
   updateProduct(id,product){
     this.firestore.doc('product/' + id).update(product);
   }

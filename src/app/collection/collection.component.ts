@@ -22,6 +22,7 @@ export class CollectionComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.productsService.search('Borrador');
     this.products$ = this.productsService.get3Products();
     this.products$.map(product => console.log('COLLECTION PRODUCT --> ',product));
   }
