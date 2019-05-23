@@ -8,7 +8,7 @@
 <div class="row">
     <h3>SEARCH</h3>
     <input value="borrador"  type="text" [(ngModel)]="term">
-    <div class="col s12 m3" *ngFor="let product of products | filter:'Borrador Alzhaimer'">
+    <div class="col s12 m3" *ngFor="let product of products | filter: term">
         <div class="card">
             <div class="card-image ">
                 <img src="{{product.image}}" class="crop">
