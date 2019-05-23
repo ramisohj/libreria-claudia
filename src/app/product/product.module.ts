@@ -6,9 +6,11 @@ import { ProductCardComponent } from './product-list/product-card.component';
 import { ProductRoutingModule } from './product-routing.router';
 import { ProductService } from '../services/product.service';
 import { FormsModule } from '@angular/forms';
+import { ProductListAllComponent } from './product-list-all/product-list-all.component';
+import { ProductItemComponent } from './product-item/product-item.component';
 @NgModule({
   declarations: [ProductRegisterComponent,
-    ProductListComponent, ProductCardComponent],
+    ProductListComponent, ProductCardComponent, ProductListAllComponent, ProductItemComponent],
   imports: [
     CommonModule,ProductRoutingModule,FormsModule
   ],providers:[
