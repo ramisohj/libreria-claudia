@@ -25,6 +25,7 @@
     "firebase": "^5.11.1",
     "jquery": "^3.4.1",
     "materialize-css": "^1.0.0-rc.2",
+    "ng2-search-filter": "^0.4.7",
     "rxjs": "^6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
