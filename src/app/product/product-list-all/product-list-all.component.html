@@ -1,3 +1,5 @@
-<p>
-  product-list-all works!
-</p>
+<ul class="collection" >
+      <li class="collection-item avatar" *ngFor="let product of products">
+          <app-product-item [product]='product'></app-product-item>
+      </li>
+</ul>
