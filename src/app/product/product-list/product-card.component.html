@@ -5,6 +5,35 @@
         height: 250px;
     }
 </style>
+
+
+<h3>
+    Carro de compras:
+</h3>
+<div>
+    <ul class="collection" >
+        <li class="collection-item avatar" *ngFor="let item of cartItems$">
+            <div class="row">
+                <div class="col s1">
+                    <img src="{{item.image}}" alt="" class="circle">
+                    <span class="title">{{item.name}}</span>
+                </div>
+                <div class="col s1">
+                    <p>Precio:  {{item.price}} <br>
+                    Cantidad: {{item.quantity}}
+                    </p>
+                </div>
+                <div class="col s1">
+                    Precio Total: {{item.price * item.quantity}}
+                </div>
+            </div>
+        </li>
+        <li class="collection-item avatar">
+            <p>PRECIO TOTAL CARRITO :  {{totalPrice$}}
+        </li>
+    </ul> 
+</div>
+
 <div class="row">
     <h3>Buscar</h3>
     <input value="borrador"  type="text" [(ngModel)]="term">
@@ -22,7 +51,7 @@
             </div>
             <div class="card-action" style="color: black">
                 <a>Mas Detalles</a>
-                <a><i class="material-icons right">shopping_cart</i></a>                
+                <a (click)="addProductToCart(product.id, product)"  ><i class="material-icons right">shopping_cart</i></a>                
             </div>
             <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4" title="Descripción"><strong>{{product.name}}</strong><i class="material-icons right">close</i></span>

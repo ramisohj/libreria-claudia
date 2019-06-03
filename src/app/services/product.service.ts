@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Product } from '../models/ProductModel';
 import { Observable } from 'rxjs';
 import { Action } from 'rxjs/internal/scheduler/Action';
+import { async } from '@angular/core/testing';
 
 
 @Injectable({
@@ -10,13 +11,10 @@ import { Action } from 'rxjs/internal/scheduler/Action';
 })
 export class ProductService {
 
-  private productList: Array<Product> = [];
-
-  private listObservable$: Observable <any>;
+  private productList: Array<any> = [];
 
   constructor( private firestore: AngularFirestore) {
-    this.listObservable$ = new Observable<any>();
-    this.listObservable$ = this.getAllProducts();
+    this.productList = this.getAllProducts();
   }
 
   createProduct(product) {
@@ -30,10 +28,6 @@ export class ProductService {
   get3Products() {
     let list3Products: any[] = new Array(3);
     let index = 0;
-    //test:
-    console.log('GET 3 PRODUTCS !!!!!');
-    console.log('PRINT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! PRODUCTS --> ', this.products$);
-    this.printID();
     this.firestore.collection('product').snapshotChanges().forEach(actions => {
       return actions.map(action => {
         const product = action.payload.doc.data();
@@ -64,31 +58,37 @@ export class ProductService {
   }
 
   getAllProducts() {
-    let allProducts: Observable<any>;
-    allProducts = new Observable<any>();
+    let allProducts: Array<any> = [];
     this.firestore.collection('product').snapshotChanges().forEach(actions => {
       actions.map(action => {
-        console.log('ID -----> ', action.payload.doc.id);
         let product = action.payload.doc.data();
         product['id'] = action.payload.doc.id;
-        console.log('Product ID ------------------------> ', product)
-        console.log('product name --> ', product['name'])
-        
+        allProducts.push(product);
       });
     });
     return allProducts;
   }
 
-  printID() {
-    console.log('Printing IDs !!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-    console.log('Products IDSSSSSSSSSSSSSSSSSSSSSS', this.listObservable$);
-    console.log('Printinf id\' user idsss ::::' )
-    console.log('PRODUCST --> ', this.listObservable$);
-    const listProducts = this.listObservable$;
-    //console.log('Print index --> ', listProducts.length);
-    listProducts.forEach(product => {
-      console.log('Value --> ', product['name']);
-    });
+  async getProductsForCart( mapProducts) {
+
+    let idList = Array.from( mapProducts.keys() );
+    let cartList: Array<Product> = [];
+
+    for (let id of idList) {
+      let  product = await this.getProduct(id);
+      cartList.push(product);
+    }
+    return cartList;
+  }
+
+  async getProduct(id){
+    var product = null;
+    this.firestore.doc('product/' + id).ref.get().then(function(doc) {
+      if (doc.exists) {
+        return doc.data();
+      } 
+    })
+    return product;
   }
 
 }
