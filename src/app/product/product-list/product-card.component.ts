@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Product } from 'src/app/models/ProductModel';
 import { ProductService } from '../../services/product.service';
+import * as M from 'materialize-css';
 
 @Component({
     selector: 'product-card',
@@ -9,11 +10,19 @@ import { ProductService } from '../../services/product.service';
 export class ProductCardComponent { 
 
     totalPrice$ = 0;
+    totalProductos$ = 0;
+    productSelected$ = Object;
+
     public itemProducts = new Map();//[id, producto]
     cartItems$: any[] ;//cart items, only product list
 
     constructor(private productService : ProductService) { 
-        
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.modal');
+            var instances = M.Modal.init(elems, {
+                inDuration: 1000,        
+            });
+        });
     }
 
     @Input()
@@ -30,6 +39,8 @@ export class ProductCardComponent {
         }
         this.cartItems$ = Array.from( this.itemProducts.values());
         this.calculateTotalPrice();
+        this.totalProduct();
+        this.productSelected$ = product;
     }
 
     private calculateTotalPrice() {      
@@ -38,4 +49,12 @@ export class ProductCardComponent {
             this.totalPrice$ += (item.quantity * item.price);
         }
     }
+
+    private totalProduct() {
+        this.totalProductos$ = 0; 
+        for(let item of this.cartItems$) {
+            this.totalProductos$ += item.quantity ;
+        }
+    }
+    
 }

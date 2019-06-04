@@ -4,32 +4,67 @@
         width: 100px;
         height: 250px;
     }
+    .modalIMage {
+        max-width: auto;
+        height: 300px;
+    }
+    .cartList {
+        margin-left: 35%;
+        margin-right: 35%;
+    }
+    .cartListImage {
+        max-width: auto;
+        height: 100px;
+    }
 </style>
 
 
-<h3>
-    Carro de compras:
-</h3>
-<div>
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+    <h4 class="center-align" >{{productSelected$.name}}</h4>
+    <div class="center-align">
+        <img src="{{productSelected$.image}}" class="modalIMage" >
+    </div>
+    <h4 class="center-align" >Producto en el carrito !!!!</h4>
+    </div>
+    <div class="modal-footer">
+    <a class="modal-action modal-close waves-effect waves-black btn">Ok</a>
+    </div>
+</div>
+
+<!--  CART LIST  -->
+<div class="cartList">
     <ul class="collection" >
+        <li>
+            <h4 class="center-align">
+                Carrito de compras:
+            </h4>
+        </li>
         <li class="collection-item avatar" *ngFor="let item of cartItems$">
             <div class="row">
-                <div class="col s1">
-                    <img src="{{item.image}}" alt="" class="circle">
-                    <span class="title">{{item.name}}</span>
+
+                <div class="col s12 m6 l3">
+                    <img src="{{item.image}}" alt="" class="cartListImage">
                 </div>
-                <div class="col s1">
+                <div class="col s12 m6 l3">
+                    <p>{{item.name}}</p>
+                </div>
+                <div class="col s12 m6 l3">
                     <p>Precio:  {{item.price}} <br>
                     Cantidad: {{item.quantity}}
                     </p>
                 </div>
-                <div class="col s1">
-                    Precio Total: {{item.price * item.quantity}}
+                <div class="col s12 m6 l3">
+                    <p>Precio Total: {{item.price * item.quantity}}</p>
                 </div>
             </div>
         </li>
-        <li class="collection-item avatar">
-            <p>PRECIO TOTAL CARRITO :  {{totalPrice$}}
+        <li class="collection-item avatar center-align">
+            <h5> NUMERO DE PRODUCTOS :  {{totalProductos$}} items.</h5>
+        </li>
+        <li class="collection-item avatar center-align">
+            <h5> PRECIO TOTAL :  Bs. {{totalPrice$}} </h5>
         </li>
     </ul> 
 </div>
@@ -43,15 +78,20 @@
                 <img src="{{product.image}}" class="crop">
             </div>
             <div class="card-content" style="padding-bottom:0px">
-                <span class="card-title activator grey-text text-darken-4"><strong>{{product.name}}</strong><i class="material-icons right">more_vert</i></span>
+                <span class="card-title activator grey-text text-darken-4">
+                    <strong>{{product.name}}</strong>
+                    <i class="material-icons right">more_vert</i>
+                </span>
                 <p for=""><strong>Cantidad:</strong> {{product.stock}} Unid.</p>
                 <div class="right-align">
                         <h5><strong>{{product.price}} Bs.</strong></h5>
                 </div>
             </div>
             <div class="card-action" style="color: black">
-                <a>Mas Detalles</a>
-                <a (click)="addProductToCart(product.id, product)"  ><i class="material-icons right">shopping_cart</i></a>                
+                <a>Mas Detalles</a>                
+                <a data-target="modal1"  class="modal-trigger" (click)="addProductToCart(product.id, product)"> 
+                    <i class="material-icons right;"> shopping_cart</i> 
+                </a>    
             </div>
             <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4" title="Descripción"><strong>{{product.name}}</strong><i class="material-icons right">close</i></span>
