@@ -14,14 +14,16 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms';
-import { CollectionComponent } from './collection/collection.component'; 
+import { CollectionComponent } from './collection/collection.component';
+import { CartComponent } from './cart/cart.component'; 
 @NgModule({
   declarations: [
     AppComponent,
     CarouselComponent,
     NavbarComponent,
     FooterComponent,
-    CollectionComponent
+    CollectionComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

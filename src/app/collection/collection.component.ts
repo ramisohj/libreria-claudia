@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class CollectionComponent implements OnInit {
 
-  products$: any[] ;
+  collections$: any[] ;
 
   constructor(private productsService : ProductService) { 
     document.addEventListener('DOMContentLoaded', function() {
@@ -23,8 +23,7 @@ export class CollectionComponent implements OnInit {
 
   ngOnInit() {
     this.productsService.search('Borrador');
-    this.products$ = this.productsService.get3Products();
-    this.products$.map(product => console.log('COLLECTION PRODUCT --> ',product));
+    this.collections$ = this.productsService.get3Products();
   }
   
 }
