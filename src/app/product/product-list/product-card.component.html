@@ -41,7 +41,7 @@
                 Carrito de compras:
             </h4>
         </li>
-        <li class="collection-item avatar" *ngFor="let item of cartItems$">
+        <li class="collection-item avatar" *ngFor="let item of cart$">
             <div class="row">
 
                 <div class="col s12 m6 l3">
@@ -61,7 +61,7 @@
             </div>
         </li>
         <li class="collection-item avatar center-align">
-            <h5> NUMERO DE PRODUCTOS :  {{totalProductos$}} items.</h5>
+            <h5> NUMERO DE PRODUCTOS :  {{totalItems$}} items.</h5>
         </li>
         <li class="collection-item avatar center-align">
             <h5> PRECIO TOTAL :  Bs. {{totalPrice$}} </h5>

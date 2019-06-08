@@ -1,20 +1,24 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Product } from '../models/ProductModel';
-import { Observable } from 'rxjs';
-import { Action } from 'rxjs/internal/scheduler/Action';
-import { async } from '@angular/core/testing';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
+  //public cart$: Array<any> = [];
   private productList: Array<any> = [];
+
+  private cartMap = new Map();//[id, producto]
+  private cart$: any[] ;//cart items, only product list
+  private totalPrice$ : number; 
+  private totalProductos$ : number; 
+  private productSelected$ = Object;
 
   constructor( private firestore: AngularFirestore) {
     this.productList = this.getAllProducts();
+    this.loadCart();
   }
 
   createProduct(product) {
@@ -89,6 +93,70 @@ export class ProductService {
       } 
     })
     return product;
+  }
+
+  loadCart() {
+    console.log('LOADING CART !!!!!!!!');
+    let cart = JSON.parse(localStorage.getItem('cart'));
+    if (cart != null){
+      if(cart.length > 0) {
+        cart.forEach(item => {
+          this.cartMap.set(item['id'], item);
+        });    
+        this.cart$ = Array.from( this.cartMap.values());
+      }
+    } else {
+      this.cart$ = [];
+    }
+    this.calculateTotalPrice();
+    this.totalProduct();
+  }
+
+  public addProductToCart(id, product) {
+    let item = product;
+    if(this.cartMap.has(id)) {
+        item['quantity'] = item['quantity'] + 1;
+        this.cartMap.set(id,item);
+    } else {
+        item['quantity'] = 1;
+        this.cartMap.set(id,item);            
+    }
+    this.cart$ = Array.from( this.cartMap.values());
+    this.calculateTotalPrice();
+    this.totalProduct();
+    this.productSelected$ = product;
+    localStorage.setItem('cart', JSON.stringify(this.cart$));
+    console.log(this.cart$);
+  }
+
+  private calculateTotalPrice() {      
+    this.totalPrice$ = 0; 
+    for(let item of this.cart$) {
+        this.totalPrice$ += (item.quantity * item.price);
+    }
+  }
+
+  private totalProduct() {
+      this.totalProductos$ = 0; 
+      for(let item of this.cart$) {
+          this.totalProductos$ += item.quantity ;
+      }
+  }
+
+  getTotalItems(){
+    return this.totalProductos$;
+  } 
+
+  getTotalPrice(){
+    return this.totalPrice$;
+  }
+
+  getProductSelected() {
+    return this.productSelected$;
+  }
+
+  getCart(){
+    return this.cart$;
   }
 
 }

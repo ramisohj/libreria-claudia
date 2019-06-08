@@ -9,52 +9,39 @@ import * as M from 'materialize-css';
 })
 export class ProductCardComponent { 
 
-    totalPrice$ = 0;
-    totalProductos$ = 0;
-    productSelected$ = Object;
+    service : ProductService;
+    productSelected$ : Object;
+    cart$ : any[];
+    totalPrice$ : number;
+    totalItems$ : number;
 
-    public itemProducts = new Map();//[id, producto]
-    cartItems$: any[] ;//cart items, only product list
+    @Input()
+    products:Product[];
 
-    constructor(private productService : ProductService) { 
+    constructor(service : ProductService) { 
         document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.modal');
             var instances = M.Modal.init(elems, {
                 inDuration: 1000,        
             });
         });
+        this.service = service;
+        this.totalPrice$ = service.getTotalPrice();
+        this.totalItems$ = service.getTotalItems();
     }
 
-    @Input()
-    products:Product[];
-
-    private addProductToCart(id, product) {
-        let item = product;
-        if(this.itemProducts.has(id)) {
-            item['quantity'] = item['quantity'] + 1;
-            this.itemProducts.set(id,item);
-        } else {
-            item['quantity'] = 1;
-            this.itemProducts.set(id,item);            
-        }
-        this.cartItems$ = Array.from( this.itemProducts.values());
-        this.calculateTotalPrice();
-        this.totalProduct();
-        this.productSelected$ = product;
+    ngOnInit() {
+        this.productSelected$ = this.service.getProductSelected();
+        this.cart$ =  this.service.getCart();
     }
 
-    private calculateTotalPrice() {      
-        this.totalPrice$ = 0; 
-        for(let item of this.cartItems$) {
-            this.totalPrice$ += (item.quantity * item.price);
-        }
-    }
-
-    private totalProduct() {
-        this.totalProductos$ = 0; 
-        for(let item of this.cartItems$) {
-            this.totalProductos$ += item.quantity ;
-        }
+    addProductToCart(id, product) {
+        this.service.addProductToCart(id, product);
+        this.productSelected$ = this.service.getProductSelected();
+        this.cart$ = this.service.getCart();
+        this.totalPrice$ = this.service.getTotalPrice();
+        this.totalItems$ = this.service.getTotalItems();
+        console.log('ADDED !!!');
     }
     
 }
