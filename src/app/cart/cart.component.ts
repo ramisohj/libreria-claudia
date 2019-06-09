@@ -1,37 +1,33 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/ProductModel';
-import { ProductService } from '../services/product.service';
-import * as M from 'materialize-css';
+import { CartService } from '../services/cart.service';
+import { CartModel } from '../models/CartModel';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-export class CartComponent {
+export class CartComponent implements OnInit {
 
-    service : ProductService;
-    cart$ : any[];
-    totalPrice$ : number;
-    totalItems$ : number;
+    cartModel$ : CartModel;
+    items$ : any[];
 
+    user : string;
 
     @Input()
     products:Product[];
 
-    constructor(service : ProductService) { 
-        document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.modal');
-            var instances = M.Modal.init(elems, {
-                inDuration: 1000,        
-            });
-        });
-        this.service = service;
-        this.cart$ = this.service.getCart();
-        this.totalPrice$ = this.service.getTotalPrice();
-        this.totalItems$ = this.service.getTotalItems();
+    constructor(private cartService : CartService) { 
+        this.cartModel$ = cartService.cartModel;
+        this.items$ = cartService.cartModel.cartShopping$;
     }
+
     ngOnInit() {
-      this.cart$ =  this.service.getCart();
+
+      this.cartService.cast.subscribe(cartModel => {
+        this.cartModel$ = cartModel;
+        this.items$ = this.cartService.cartModel.cartShopping$;
+      })      
     }
 }

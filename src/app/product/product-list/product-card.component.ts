@@ -1,47 +1,46 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/ProductModel';
-import { ProductService } from '../../services/product.service';
+import { CartService } from '../../services/cart.service';
 import * as M from 'materialize-css';
+import { CartModel } from 'src/app/models/CartModel';
 
 @Component({
     selector: 'product-card',
     templateUrl: 'product-card.component.html'
 })
-export class ProductCardComponent { 
+export class ProductCardComponent implements OnInit { 
 
-    service : ProductService;
     productSelected$ : Object;
-    cart$ : any[];
-    totalPrice$ : number;
-    totalItems$ : number;
+    cartModel$ : CartModel;
 
     @Input()
     products:Product[];
 
-    constructor(service : ProductService) { 
+    constructor(private cartService : CartService) { 
+
         document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.modal');
             var instances = M.Modal.init(elems, {
                 inDuration: 1000,        
             });
         });
-        this.service = service;
-        this.totalPrice$ = service.getTotalPrice();
-        this.totalItems$ = service.getTotalItems();
+        this.cartService = cartService;
     }
 
     ngOnInit() {
-        this.productSelected$ = this.service.getProductSelected();
-        this.cart$ =  this.service.getCart();
+        this.productSelected$ = this.cartService.cartModel.productSelected$;
+        this.cartModel$ =  this.cartService.cartModel;
+
+        this.cartService.cast.subscribe(cartModel => 
+            this.cartModel$ = cartModel
+        );
     }
 
     addProductToCart(id, product) {
-        this.service.addProductToCart(id, product);
-        this.productSelected$ = this.service.getProductSelected();
-        this.cart$ = this.service.getCart();
-        this.totalPrice$ = this.service.getTotalPrice();
-        this.totalItems$ = this.service.getTotalItems();
-        console.log('ADDED !!!');
+        this.cartService.cartModel.addProductToCart(id, product);
+        this.productSelected$ = this.cartService.cartModel.productSelected$;
+        this.cartModel$ = this.cartService.cartModel;
+        this.cartService.updateCart(this.cartModel$);
     }
     
 }
