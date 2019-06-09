@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Product } from '../models/ProductModel';
-import { Observable } from 'rxjs';
-import { Action } from 'rxjs/internal/scheduler/Action';
-import { async } from '@angular/core/testing';
-
 
 @Injectable({
   providedIn: 'root'
@@ -68,27 +63,4 @@ export class ProductService {
     });
     return allProducts;
   }
-
-  async getProductsForCart( mapProducts) {
-
-    let idList = Array.from( mapProducts.keys() );
-    let cartList: Array<Product> = [];
-
-    for (let id of idList) {
-      let  product = await this.getProduct(id);
-      cartList.push(product);
-    }
-    return cartList;
-  }
-
-  async getProduct(id){
-    var product = null;
-    this.firestore.doc('product/' + id).ref.get().then(function(doc) {
-      if (doc.exists) {
-        return doc.data();
-      } 
-    })
-    return product;
-  }
-
 }

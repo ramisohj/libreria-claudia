@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Product } from 'src/app/models/ProductModel';
+import { CartService } from '../services/cart.service';
+import { CartModel } from '../models/CartModel';
 
 @Component({
   selector: 'app-cart',
@@ -7,9 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 
-  constructor() { }
+    cartModel$ : CartModel;
+    items$ : any[];
 
-  ngOnInit() {
-  }
+    user : string;
 
+    @Input()
+    products:Product[];
+
+    constructor(private cartService : CartService) { 
+        this.cartModel$ = cartService.cartModel;
+        this.items$ = cartService.cartModel.cartShopping$;
+    }
+
+    ngOnInit() {
+
+      this.cartService.cast.subscribe(cartModel => {
+        this.cartModel$ = cartModel;
+        this.items$ = this.cartService.cartModel.cartShopping$;
+      })      
+    }
 }

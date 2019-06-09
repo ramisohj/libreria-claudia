@@ -1,60 +1,46 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/ProductModel';
-import { ProductService } from '../../services/product.service';
+import { CartService } from '../../services/cart.service';
 import * as M from 'materialize-css';
+import { CartModel } from 'src/app/models/CartModel';
 
 @Component({
     selector: 'product-card',
     templateUrl: 'product-card.component.html'
 })
-export class ProductCardComponent { 
+export class ProductCardComponent implements OnInit { 
 
-    totalPrice$ = 0;
-    totalProductos$ = 0;
-    productSelected$ = Object;
+    productSelected$ : Object;
+    cartModel$ : CartModel;
 
-    public itemProducts = new Map();//[id, producto]
-    cartItems$: any[] ;//cart items, only product list
+    @Input()
+    products:Product[];
 
-    constructor(private productService : ProductService) { 
+    constructor(private cartService : CartService) { 
+
         document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.modal');
             var instances = M.Modal.init(elems, {
                 inDuration: 1000,        
             });
         });
+        this.cartService = cartService;
     }
 
-    @Input()
-    products:Product[];
+    ngOnInit() {
+        this.productSelected$ = this.cartService.cartModel.productSelected$;
+        this.cartModel$ =  this.cartService.cartModel;
 
-    private addProductToCart(id, product) {
-        let item = product;
-        if(this.itemProducts.has(id)) {
-            item['quantity'] = item['quantity'] + 1;
-            this.itemProducts.set(id,item);
-        } else {
-            item['quantity'] = 1;
-            this.itemProducts.set(id,item);            
-        }
-        this.cartItems$ = Array.from( this.itemProducts.values());
-        this.calculateTotalPrice();
-        this.totalProduct();
-        this.productSelected$ = product;
+        this.cartService.cast.subscribe(cartModel => 
+            this.cartModel$ = cartModel
+        );
     }
 
-    private calculateTotalPrice() {      
-        this.totalPrice$ = 0; 
-        for(let item of this.cartItems$) {
-            this.totalPrice$ += (item.quantity * item.price);
-        }
-    }
-
-    private totalProduct() {
-        this.totalProductos$ = 0; 
-        for(let item of this.cartItems$) {
-            this.totalProductos$ += item.quantity ;
-        }
+    addProductToCart(id, product) {
+        this.cartService.cartModel.addProductToCart(id, product);
+        this.productSelected$ = this.cartService.cartModel.productSelected$;
+        this.cartModel$ = this.cartService.cartModel;
+        this.cartService.updateCart(this.cartModel$);
     }
     
 }
