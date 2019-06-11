@@ -36,5 +36,10 @@
       <li class="collection-item avatar center-align">
           <h5> PRECIO TOTAL :  Bs. {{cartModel$.totalPrice$}} </h5>
       </li>
+      <div class="collection-item avatar center-align">
+        <button type="submit" class="btn waves-effect waves-light" (click)="clear()">
+            <a href="/cart" style="color: white;">Limpiar Todo</a>
+        </button>
+      </div>
   </ul> 
 </div>

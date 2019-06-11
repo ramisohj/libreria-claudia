@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/ProductModel';
 import { CartService } from '../services/cart.service';
 import { CartModel } from '../models/CartModel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -18,7 +19,7 @@ export class CartComponent implements OnInit {
     @Input()
     products:Product[];
 
-    constructor(private cartService : CartService) { 
+    constructor(private cartService : CartService, private router: Router) { 
         this.cartModel$ = cartService.cartModel;
         this.items$ = cartService.cartModel.cartShopping$;
     }
@@ -42,6 +43,10 @@ export class CartComponent implements OnInit {
       this.cartService.cast.subscribe(cartModel => {
         this.cartModel$ = cartModel;
         this.items$ = this.cartService.cartModel.cartShopping$;
-      })      
+        console.log(this.items$);   
+      });
+    }
+    clear(){
+      localStorage.clear();
     }
 }

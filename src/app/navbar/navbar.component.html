@@ -7,6 +7,10 @@
   <li><a href="/product/delete" class="white-text">Eliminar Productos</a></li>
 </ul>
 
+<ul id="dropdown2" class="dropdown-content"  style="width: 500px;" >
+  <app-cart></app-cart>
+</ul>
+
 <!-- Navbar Structure -->
 <nav>
   <div class="nav-wrapper black">
@@ -17,6 +21,15 @@
             <img class="material-icons" src="assets/icons/list.svg" style="filter: invert(1)">
           </a>
         </li>
+        <li>
+            <form>
+              <div class="input-field col s12" hidden>
+                <i class="material-icons prefix">textsms</i>
+                <input type="text" id="autocomplete-input" class="autocomplete">
+                <label for="autocomplete-input">Autocomplete</label>
+              </div>
+            </form>
+        </li>
     </ul>
     <ul id="#!" class="right">
         <li>
@@ -25,7 +38,7 @@
           </a>
         </li>
         <li>
-          <a href="#!">
+          <a href="/cart">
               <img src="assets/icons/shopping-cart.svg" style="filter: invert(1)">
           </a>
         </li>
