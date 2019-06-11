@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CartComponent } from  '../cart/cart.component';
+
 
 declare var $: any;
 
@@ -22,6 +24,16 @@ export class NavbarComponent implements OnInit{
   ngOnInit(): void {
     $(document).ready(() => {
       $(".dropdown-trigger").dropdown();
+    });
+
+    $(document).ready(() => {
+      $(".dropdown-cartList").dropdown({
+        constrain_width: false,
+        gutter: 0, 
+        belowOrigin: true, 
+        alignment: 'center' 
+        }
+      );     
     });
   }
 }
