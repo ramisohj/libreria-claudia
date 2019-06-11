@@ -53,9 +53,10 @@ export class CartModel {
   }
 
   public addProductToCart(id, product) {
+    this.productSelected$ = product;
     let item = product;
     if(this.cartMap.has(id)) {
-        item['quantity'] = item['quantity'] + 1;
+        item['quantity'] = this.cartMap.get(id)['quantity'] + 1;
         this.cartMap.set(id,item);
     } else {
         item['quantity'] = 1;
@@ -64,11 +65,9 @@ export class CartModel {
     this.cartShopping$ = Array.from( this.cartMap.values());
     this.calculateTotalPrice();
     this.totalProduct();
-    this.productSelected$ = product;
     localStorage.setItem('cart', JSON.stringify(this.cartShopping$));    
-
   }
-  
+
   private calculateTotalPrice() {      
     this.totalPrice$ = 0; 
     for(let item of this.cartShopping$) {

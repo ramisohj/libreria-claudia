@@ -21,7 +21,7 @@
 <!-- Modal Structure -->
 <div id="modal1" class="modal">
     <div class="modal-content">
-    <h4 class="center-align" >{{productSelected$.name}}</h4>
+        <h4 class="center-align" >{{productSelected$.name}}</h4>
     <div class="center-align">
         <img src="{{productSelected$.image}}" class="modalIMage" >
     </div>
@@ -32,9 +32,11 @@
     </div>
 </div>
 
-<div class="row">
-    <h3>Buscar</h3>
-    <input value="borrador"  type="text" [(ngModel)]="term">
+<div class="row">  
+    <div class="row">
+        <div class="col s0"><img class="material-icons" src="assets/icons/search.svg"  style="width: 50px;"></div>
+        <div class="col s3"><input value="borrador"  type="text" [(ngModel)]="term" style="font-size: 30px;" ></div>
+    </div>
     <div class="col s12 m3" *ngFor="let product of products | filter: term">
         <div class="card">
             <div class="card-image ">

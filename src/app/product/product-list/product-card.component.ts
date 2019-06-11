@@ -17,7 +17,6 @@ export class ProductCardComponent implements OnInit {
     products:Product[];
 
     constructor(private cartService : CartService) { 
-
         document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.modal');
             var instances = M.Modal.init(elems, {
@@ -25,14 +24,15 @@ export class ProductCardComponent implements OnInit {
             });
         });
         this.cartService = cartService;
+        this.cartModel$ = cartService.cartModel;
+        this.productSelected$ = this.cartService.cartModel.productSelected$
     }
 
     ngOnInit() {
-        this.productSelected$ = this.cartService.cartModel.productSelected$;
         this.cartModel$ =  this.cartService.cartModel;
-
         this.cartService.cast.subscribe(cartModel => 
-            this.cartModel$ = cartModel
+            this.cartModel$ = cartModel,
+            this.productSelected$ = this.cartService.cartModel.productSelected$
         );
     }
 
