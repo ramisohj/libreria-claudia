@@ -26,6 +26,13 @@ export class CartModel {
     return cartList;
   }
 
+  public async delete(value: CartModel) {
+    this.cartMap.delete(value['id']);
+    this.cartShopping$ = Array.from( this.cartMap.values());
+    this.totalProduct();
+    this.calculateTotalPrice();
+  }
+
   public async getProduct(id){
     var product = null;
     this.firestore.doc('product/' + id).ref.get().then(function(doc) {

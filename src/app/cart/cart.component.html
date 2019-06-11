@@ -6,9 +6,8 @@
               Carrito de compras:
           </h4>
       </li>
-      <li class="collection-item avatar" *ngFor="let item of items$">
+      <li class="collection-item avatar" *ngFor="let item of items$; let i = index">
           <div class="row">
-
               <div class="col s12 m6 l3">
                   <img src="{{item.image}}" alt="" class="cartListImage">
               </div>
@@ -17,8 +16,14 @@
               </div>
               <div class="col s12 m6 l3">
                   <p>Precio:  {{item.price}} <br>
-                  Cantidad: {{item.quantity}}
+                  Cantidad: <input type="number" min="1" max="{{item.stock}}" value="{{item.quantity}}" 
+                  (input)="changeCount($event.target.value, item, i)">
                   </p>
+              </div>
+              <div class="col s12 m6 l3">
+                <a style="color: #ffab40" (click)="remove(item)">
+                        <i class="material-icons dp48">delete</i>
+                </a>
               </div>
               <div class="col s12 m6 l3">
                   <p>Precio Total: {{item.price * item.quantity}}</p>

@@ -17,6 +17,18 @@ export class CartService {
     this.obsCart.next(newCart);
   }
 
+  removeCart(data: CartModel) {
+    let values = this.cartModel.cartShopping$;
+    let this$ = this;
+ 
+      values.forEach(function(item) {
+         if(item['id'] === data['id']) {
+            this$.cartModel.delete(data);
+          }
+      });
+    this.updateCart(this.cartModel)
+  }
+
   constructor() {
     this.cartModel = new CartModel();
   }

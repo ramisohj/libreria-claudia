@@ -23,8 +23,22 @@ export class CartComponent implements OnInit {
         this.items$ = cartService.cartModel.cartShopping$;
     }
 
-    ngOnInit() {
+    changeCount(value: number, cartModel: CartModel, index: number) {
+      let nroItems = value - cartModel['quantity'];
+      let countPrice = nroItems * cartModel['price'];
+      cartModel['quantity'] = value;
+      this.cartService.updateCart(cartModel);
+      this.cartService.cartModel.totalProductos$ = this.cartService.cartModel.totalProductos$ + nroItems;
+      this.cartService.cartModel.totalPrice$ = this.cartService.cartModel.totalPrice$ + countPrice;
+      this.cartModel$ = this.cartService.cartModel;
+    }
 
+    remove(item: CartModel) {
+      this.cartService.removeCart(item);
+      this.items$ = this.cartService.cartModel.cartShopping$;
+    }
+
+    ngOnInit() {
       this.cartService.cast.subscribe(cartModel => {
         this.cartModel$ = cartModel;
         this.items$ = this.cartService.cartModel.cartShopping$;
