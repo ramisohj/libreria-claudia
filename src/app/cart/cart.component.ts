@@ -35,8 +35,10 @@ export class CartComponent implements OnInit {
     }
 
     remove(item: CartModel) {
+      let listProdut = localStorage.getItem('cart');
       this.cartService.removeCart(item);
       this.items$ = this.cartService.cartModel.cartShopping$;
+      localStorage.setItem('cart', JSON.stringify(this.items$));
     }
 
     ngOnInit() {
