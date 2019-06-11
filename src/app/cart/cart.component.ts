@@ -28,7 +28,7 @@ export class CartComponent implements OnInit {
       this.cartService.cast.subscribe(cartModel => {
         this.cartModel$ = cartModel;
         this.items$ = this.cartService.cartModel.cartShopping$;
-        console.log( this.items$,'hola');   
+        console.log(this.items$);   
       });
     }
     clear(){
