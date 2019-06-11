@@ -1,0 +1,12 @@
+.modalIMage {
+    max-width: auto;
+    height: 300px;
+}
+.cartList {
+    margin-left: 35%;
+    margin-right: 35%;
+}
+.cartListImage {
+    max-width: auto;
+    height: 100px;
+}

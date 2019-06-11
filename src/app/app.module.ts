@@ -16,6 +16,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms';
 import { CollectionComponent } from './collection/collection.component';
 import { CartComponent } from './cart/cart.component'; 
+import { CartService } from './services/cart.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +37,7 @@ import { CartComponent } from './cart/cart.component';
     AngularFireAuthModule,
     FormsModule
   ],
-  providers: [ProductService],
+  providers: [ProductService, CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
