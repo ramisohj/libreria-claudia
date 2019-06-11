@@ -77,16 +77,20 @@ export class CartModel {
 
   private calculateTotalPrice() {      
     this.totalPrice$ = 0; 
-    for(let item of this.cartShopping$) {
+    if(typeof this.cartShopping$ !== 'undefined') {
+      for(let item of this.cartShopping$) {
         this.totalPrice$ += (item.quantity * item.price);
+    }
     }
   }
 
   private totalProduct() {
       this.totalProductos$ = 0; 
+      if(typeof this.cartShopping$ !== 'undefined') {
       for(let item of this.cartShopping$) {
           this.totalProductos$ += item.quantity ;
       }
+    }
   }
 }
   
