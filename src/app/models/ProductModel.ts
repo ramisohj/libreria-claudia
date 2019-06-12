@@ -4,5 +4,6 @@ export interface Product{
     price:number,
     image?:string,
     stock:number,
-    description?:string
+    description?:string,
+    addToCart:number
 }

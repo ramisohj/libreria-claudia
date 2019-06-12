@@ -63,12 +63,13 @@ export class CartModel {
     this.productSelected$ = product;
     let item = product;
     if(this.cartMap.has(id)) {
-        item['quantity'] = this.cartMap.get(id)['quantity'] + 1;
+        item['quantity'] = this.cartMap.get(id)['quantity'] + product.addToCart;
         this.cartMap.set(id,item);
     } else {
-        item['quantity'] = 1;
+        item['quantity'] = product.addToCart;
         this.cartMap.set(id,item);            
     }
+    product.addToCart = 1;
     this.cartShopping$ = Array.from( this.cartMap.values());
     this.calculateTotalPrice();
     this.totalProduct();

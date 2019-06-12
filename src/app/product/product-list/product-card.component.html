@@ -26,6 +26,7 @@
         <img src="{{productSelected$.image}}" class="modalIMage" >
     </div>
     <h4 class="center-align" >Producto en el carrito !!!!</h4>
+    <h4 class="center-align" >Numero de unidades: {{numAdded$}}</h4>
     </div>
     <div class="modal-footer">
     <a class="modal-action modal-close waves-effect waves-black btn">Ok</a>
@@ -56,7 +57,14 @@
                 <a>Mas Detalles</a>                
                 <a data-target="modal1"  class="modal-trigger" (click)="addProductToCart(product.id, product)"> 
                     <i class="material-icons right;"> shopping_cart</i> 
-                </a>    
+                </a> 
+                
+                <button (click)="increment(product)">Add</button>
+                <span id="number"> {{product.addToCart}}   </span>
+                <button (click)="decrement(product)">Remove</button>
+                
+
+
             </div>
             <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4" title="Descripción"><strong>{{product.name}}</strong><i class="material-icons right">close</i></span>

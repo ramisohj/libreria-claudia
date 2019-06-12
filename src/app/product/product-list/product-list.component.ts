@@ -22,7 +22,8 @@ export class ProductListComponent implements OnInit {
                         description: e.payload.doc.data()['description'],
                         price: e.payload.doc.data()['price'],
                         stock: e.payload.doc.data()['stock'],
-                        image: e.payload.doc.data()['image']
+                        image: e.payload.doc.data()['image'],
+                        addToCart:1
                     };
                 })
             }

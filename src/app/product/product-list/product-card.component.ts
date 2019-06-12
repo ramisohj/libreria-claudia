@@ -12,9 +12,11 @@ export class ProductCardComponent implements OnInit {
 
     productSelected$ : Object;
     cartModel$ : CartModel;
+    numAdded$: number;
 
     @Input()
     products:Product[];
+    public counter : number = 0;
 
     constructor(private cartService : CartService) { 
         document.addEventListener('DOMContentLoaded', function() {
@@ -23,6 +25,7 @@ export class ProductCardComponent implements OnInit {
                 inDuration: 1000,        
             });
         });
+        this.numAdded$ = 1;
         this.cartService = cartService;
         this.cartModel$ = cartService.cartModel;
         this.productSelected$ = this.cartService.cartModel.productSelected$
@@ -37,10 +40,22 @@ export class ProductCardComponent implements OnInit {
     }
 
     addProductToCart(id, product) {
+        this.numAdded$ = product.addToCart;
         this.cartService.cartModel.addProductToCart(id, product);
         this.productSelected$ = this.cartService.cartModel.productSelected$;
         this.cartModel$ = this.cartService.cartModel;
         this.cartService.updateCart(this.cartModel$);
     }
+
+    increment(product : Product){
+        product.addToCart +=1;
+    }
+      
+    decrement(product : Product){
+        if (product.addToCart != 1){
+            product.addToCart -=1;
+        }
+    }
+
     
 }

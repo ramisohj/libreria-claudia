@@ -15,7 +15,8 @@ export class ProductRegisterComponent implements OnInit {
     image:'',
     name:'',
     price:null,
-    stock:null
+    stock:null,
+    addToCart: 1
   };
 
   constructor(private productService: ProductService) { }
