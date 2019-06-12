@@ -53,15 +53,15 @@
                         <h5><strong>{{product.price}} Bs.</strong></h5>
                 </div>
             </div>
-            <div class="card-action" style="color: black">
-                <a>Mas Detalles</a>                
-                <a data-target="modal1"  class="modal-trigger" (click)="addProductToCart(product.id, product)"> 
-                    <i class="material-icons right;"> shopping_cart</i> 
+            <div class="card-action" >
+                <!-- <a style="color: #26a69a " >Mas Detalles</a>                 -->
+                <a style="color: #26a69a " data-target="modal1"  class="modal-trigger" (click)="addProductToCart(product.id, product)"> 
+                    <i class="material-icons right icon-blue;" > shopping_cart</i> 
                 </a> 
                 
-                <button (click)="increment(product)">Add</button>
-                <span id="number"> {{product.addToCart}}   </span>
-                <button (click)="decrement(product)">Remove</button>
+                <button class="waves-effect waves-light btn" (click)="increment(product)">Add</button>
+                <font size="6" color="#26a69a" >   {{product.addToCart}}   </font>
+                <button class="waves-effect waves-light btn" (click)="decrement(product)">Remove</button>
                 
 
 
