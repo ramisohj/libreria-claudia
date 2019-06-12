@@ -48,7 +48,9 @@ export class ProductCardComponent implements OnInit {
     }
 
     increment(product : Product){
-        product.addToCart +=1;
+        if (product.stock > product.addToCart){
+            product.addToCart +=1;
+        }
     }
       
     decrement(product : Product){
